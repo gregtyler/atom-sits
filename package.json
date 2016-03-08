@@ -1,7 +1,7 @@
 {
   "name": "atom-sits",
   "main": "./lib/atom-sits",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A short description of your package",
   "keywords": [],
   "repository": "https://github.com/gregtyler/atom-sits",
