@@ -2,7 +2,7 @@
   "name": "atom-sits",
   "main": "./lib/atom-sits",
   "version": "0.2.3",
-  "description": "A short description of your package",
+  "description": "Adds SITS syntax support to Atom",
   "keywords": [],
   "repository": "https://github.com/gregtyler/atom-sits",
   "license": "MIT",

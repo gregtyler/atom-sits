@@ -1,6 +1,5 @@
 module.exports = AtomSits =
   activate: (state) ->
-    console.log 'activated'
     atom.commands.add 'atom-text-editor', 'atom-sits:escape-semicolon', -> @getModel().insertText('·;')
     atom.commands.add 'atom-text-editor', 'atom-sits:escape-pipe', -> @getModel().insertText('·|')
     atom.commands.add 'atom-text-editor', 'atom-sits:escape-ampersand', -> @getModel().insertText('·&')
