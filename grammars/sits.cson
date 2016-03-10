@@ -1,0 +1,112 @@
+'scopeName': 'text.html.sits'
+'name': 'SITS'
+'injectionSelector': 'text.html'
+'patterns': [
+  {
+    'include': '#tag-double'
+  }
+  {
+    'include': '#sel-begin'
+  }
+  {
+    'match': '<<--(.+)-->>'
+    'name': 'comment.block.sits',
+  }
+]
+'repository':
+  'comment':
+    'begin': '--'
+    'end' :'--'
+    'name': 'comment.line.sits'
+  'operator':
+    'match': '&[A-Z]{1}'
+    'name': 'keyword.control.amp.sits'
+  'slp-ref':
+    'match': '@([A-Z0-9_.]+)'
+    'name': 'support.function.construct.sits'
+  'variable-definition':
+    'begin': '(#(?:[A-Z0-9_.]+))(=)'
+    'end': '(>>)'
+    'beginCaptures':
+      '1':
+        'name': 'punctuation.definition.variable.sits'
+      '2':
+        'name': 'keyword.operator.assignment.sits'
+    'endCaptures':
+      '1':
+        'name': 'keyword.operator.assignment.sits'
+    'name': 'string.sits'
+    'patterns': [
+      {
+        'include': '#tag-single'
+      }
+    ]
+  'variable-ref':
+    'match': '#&([A-Z0-9_.]+)'
+    'name': 'variable.other.sits'
+  'field-ref':
+    'match': '([A-Z]{3}_[A-Z0-9]+)(\\.[A-Z0-9]+)?(\\.[A-Z]{3,10})?'
+    'name': 'entity.name.tag.sits'
+  'tag-double':
+    'begin': '(<<)'
+    'captures':
+      '1':
+        'name': 'punctuation.definition.tag.sits'
+    'end': '(>>)'
+    'name': 'meta.tag.preprocessor.sits'
+    'patterns': [
+      {
+        'include': '#comment'
+      }
+      {
+        'include': '#slp-ref'
+      }
+      {
+        'include': '#variable-definition'
+      }
+      {
+        'include': '#variable-ref'
+      }
+      {
+        'include': '#field-ref'
+      }
+      {
+        'include': '#operator'
+      }
+    ]
+  'tag-single':
+    'begin': '(<)'
+    'end': '(>)'
+    'name': 'meta.tag.preprocessor.sits'
+    'patterns': [
+      {
+        'include': '#operator'
+      }
+      {
+        'include': '#comment'
+      }
+      {
+        'include': '#slp-ref'
+      }
+      {
+        'include': '#variable-definition'
+      }
+      {
+        'include': '#variable-ref'
+      }
+      {
+        'include': '#field-ref'
+      }
+    ]
+  'sel-begin':
+    'begin': '\\{\\{(SEL):\\(?'
+    'end': '\\)?:'
+    'beginCaptures':
+      '1':
+        'name': 'keyword.operator.assignment.sits'
+
+    'patterns': [
+      {
+        'include': '#tag-double'
+      }
+    ]
