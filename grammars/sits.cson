@@ -3,14 +3,17 @@
 'injectionSelector': 'text.html'
 'patterns': [
   {
-    'include': '#tag-double'
+    'include': '#sel-begin'
   }
   {
-    'include': '#sel-begin'
+    'include': '#list-begin'
   }
   {
     'match': '<<--(.+)-->>'
     'name': 'comment.block.sits',
+  }
+  {
+    'include': '#tag-double'
   }
 ]
 'repository':
@@ -19,30 +22,20 @@
     'end' :'--'
     'name': 'comment.line.sits'
   'operator':
-    'match': '&[A-Z]{1}'
+    'match': '&(A(PREFIX|SUFFIX)?|C|D|E(F|L)?|F|G|HX?|L|M|N|P|Q|R|S(BLANK)?|U|V|W|X|#(ASCII|LATIN|UCAS|MD5|5|URL|BASE64|BASE64URL|SQL|AES|TDES|BLOWFISH|SSO|SSOREC)|%|@){1}'
     'name': 'keyword.control.amp.sits'
   'slp-ref':
     'match': '@([A-Z0-9_.]+)'
-    'name': 'support.function.construct.sits'
+    'name': 'entity.name.function.sits'
   'variable-definition':
-    'begin': '(#(?:[A-Z0-9_.]+))(=)'
-    'end': '(>>)'
-    'beginCaptures':
+    'match': '(#(?:[A-Z0-9_.]+))(=)'
+    'captures':
       '1':
         'name': 'punctuation.definition.variable.sits'
       '2':
         'name': 'keyword.operator.assignment.sits'
-    'endCaptures':
-      '1':
-        'name': 'keyword.operator.assignment.sits'
-    'name': 'string.sits'
-    'patterns': [
-      {
-        'include': '#tag-single'
-      }
-    ]
   'variable-ref':
-    'match': '#&([A-Z0-9_.]+)'
+    'match': '#([A-Z0-9_.]+)'
     'name': 'variable.other.sits'
   'field-ref':
     'match': '([A-Z]{3}_[A-Z0-9]+)(\\.[A-Z0-9]+)?(\\.[A-Z]{3,10})?'
@@ -97,15 +90,59 @@
       {
         'include': '#field-ref'
       }
+    ],
+  'string':
+    'begin': '"'
+    'end': '"'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.sits'
+    'name': 'punctuation.definition.string.end.sits'
+    'endCaptures':
+      '0':
+        'name': 'string.quoted.double.sits'
+    'patterns': [
+      {'include': '#tag-double'}
     ]
+  'conditionals':
+   'patterns': [
+     {
+       'include': '#tag-double'
+     }
+     {
+       'include': '#string'
+     }
+   ]
   'sel-begin':
     'begin': '\\{\\{(SEL):\\(?'
     'end': '\\)?:'
     'beginCaptures':
       '1':
-        'name': 'keyword.operator.assignment.sits'
-
+        'name': 'keyword.control.sits'
     'patterns': [
+      {
+        'include': '#conditionals'
+      }
+    ]
+  'list-begin':
+    'begin': '\\[\\[(([A-Z0-9]+)\\.([A-Z0-9]+)):'
+    'end': '\\]\\]'
+    'beginCaptures':
+      '1':
+        'name': 'meta.tag.preprocessor.sits'
+    'patterns': [
+      {
+        'begin': '(SEL):'
+        'end': ':'
+        'beginCaptures':
+          '1':
+            'name': 'keyword.control.sits'
+        'patterns': [
+          {
+            'include': '#conditionals'
+          }
+        ]
+      }
       {
         'include': '#tag-double'
       }
