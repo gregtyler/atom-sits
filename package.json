@@ -1,7 +1,7 @@
 {
   "name": "atom-sits",
   "main": "./lib/atom-sits",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Adds SITS syntax support to Atom",
   "keywords": [],
   "repository": "https://github.com/gregtyler/atom-sits",

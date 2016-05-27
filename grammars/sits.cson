@@ -1,6 +1,6 @@
-'scopeName': 'text.html.sits'
-'name': 'SITS'
-'injectionSelector': 'text.html'
+'scopeName': 'text.srltext'
+'name': 'SRLText'
+'injectionSelector': '*'
 'patterns': [
   {
     'include': '#sel-begin'
@@ -10,7 +10,7 @@
   }
   {
     'match': '<<--(.+)-->>'
-    'name': 'comment.block.sits',
+    'name': 'comment.block.srltext',
   }
   {
     'include': '#tag-double'
@@ -20,33 +20,33 @@
   'comment':
     'begin': '--'
     'end' :'--'
-    'name': 'comment.line.sits'
+    'name': 'comment.line.srltext'
   'operator':
     'match': '&(A(PREFIX|SUFFIX)?|C|D|E(F|L)?|F|G|HX?|L|M|N|P|Q|R|S(BLANK)?|U|V|W|X|#(ASCII|LATIN|UCAS|MD5|5|URL|BASE64|BASE64URL|SQL|AES|TDES|BLOWFISH|SSO|SSOREC)|%|@){1}'
-    'name': 'keyword.control.amp.sits'
+    'name': 'keyword.control.amp.srltext'
   'slp-ref':
     'match': '@([A-Z0-9_.]+)'
-    'name': 'entity.name.function.sits'
+    'name': 'entity.name.function.srltext'
   'variable-definition':
     'match': '(#(?:[A-Z0-9_.]+))(=)'
     'captures':
       '1':
-        'name': 'punctuation.definition.variable.sits'
+        'name': 'punctuation.definition.variable.srltext'
       '2':
-        'name': 'keyword.operator.assignment.sits'
+        'name': 'keyword.operator.assignment.srltext'
   'variable-ref':
     'match': '#([A-Z0-9_.]+)'
-    'name': 'variable.other.sits'
+    'name': 'variable.other.srltext'
   'field-ref':
     'match': '([A-Z]{3}_[A-Z0-9]+)(\\.[A-Z0-9]+)?(\\.[A-Z]{3,10})?'
-    'name': 'entity.name.tag.sits'
+    'name': 'entity.name.tag.srltext'
   'tag-double':
     'begin': '(<<)'
     'captures':
       '1':
-        'name': 'punctuation.definition.tag.sits'
+        'name': 'punctuation.definition.tag.srltext'
     'end': '(>>)'
-    'name': 'meta.tag.preprocessor.sits'
+    'name': 'meta.tag.preprocessor.srltext'
     'patterns': [
       {
         'include': '#comment'
@@ -70,7 +70,7 @@
   'tag-single':
     'begin': '(<)'
     'end': '(>)'
-    'name': 'meta.tag.preprocessor.sits'
+    'name': 'meta.tag.preprocessor.srltext'
     'patterns': [
       {
         'include': '#operator'
@@ -96,11 +96,11 @@
     'end': '"'
     'beginCaptures':
       '0':
-        'name': 'punctuation.definition.string.begin.sits'
-    'name': 'punctuation.definition.string.end.sits'
+        'name': 'punctuation.definition.string.begin.srltext'
+    'name': 'punctuation.definition.string.end.srltext'
     'endCaptures':
       '0':
-        'name': 'string.quoted.double.sits'
+        'name': 'string.quoted.double.srltext'
     'patterns': [
       {'include': '#tag-double'}
     ]
@@ -118,7 +118,7 @@
     'end': '\\)?:'
     'beginCaptures':
       '1':
-        'name': 'keyword.control.sits'
+        'name': 'keyword.control.srltext'
     'patterns': [
       {
         'include': '#conditionals'
@@ -129,14 +129,14 @@
     'end': '\\]\\]'
     'beginCaptures':
       '1':
-        'name': 'meta.tag.preprocessor.sits'
+        'name': 'meta.tag.preprocessor.srltext'
     'patterns': [
       {
         'begin': '(SEL):'
         'end': ':'
         'beginCaptures':
           '1':
-            'name': 'keyword.control.sits'
+            'name': 'keyword.control.srltext'
         'patterns': [
           {
             'include': '#conditionals'

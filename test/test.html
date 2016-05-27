@@ -1,0 +1,395 @@
+<<@UOE_MASTER_CSS>>
+<<@JS_JQUERY>>
+<<@JS_UOE_CORE>>
+
+<<-- Some comment -->>
+
+{{SEL:("<<SCE_SCJC.SCE.SRS>>"="S0927667"):True}{False}}
+
+[[CAP.SRS:SEL:"<<CAP_MCRC.CAP>>"="<<IOI_MCRC.IOI>>":
+  <<CAP_DEC1.CAP>> <<DEC_CODE.DEC=<CAP_DEC1.CAP.SRS>&GDEC_NOTE.DEC.SRS>>
+]]
+
+<<-- entry comment --SCE_SCJC.SCE.SRS&G@SOME_SLP&SBLANK="TPOL">>
+<<SCE_SCJC.SCE.SRS&G[SCE.SRS:·<·<SCE_SEQ2·>·>]>>
+
+<<#NAVBAR_PARENT=Progression>>
+<<#NAVBAR_CHILD=Progression outcomes>>
+<<@EUCLID_NAVBAR>>
+
+<<#NAVBAR_CHILD>>
+
+<<SCE_SCJC=<#SCE_SCJC>&GSCE_BLOCK.SCE>>
+<<#TIMPLE=SCE_SCJC=<#SCE_SCJC>&GSCE_BLOCK.SCE>>
+
+<style type="text/css">
+  .table-progression > tbody > tr > th, .table-progression > tbody > tr > td {
+    padding: 1.5rem 1rem;
+    font-size: 1.6rem;
+    vertical-align: middle;
+  }
+  .table-progression label {
+    margin-bottom: 0;
+  }
+  .field-editable {
+    border-bottom: 1px dashed #AAA;
+  }
+  [modal-cover="Y"] .modal {
+    transform: translateY(100%);
+    transition: transform 0.5s ease-in;
+  }
+  [modal-cover="Y"] .modal.in {
+    transform: translateY(0);
+  }
+  [modal-cover="Y"] .modal-dialog {
+    width: 100%;
+    margin-bottom: 0;
+  }
+  [modal-cover="Y"] .modal-content {
+    border: 0;
+    border-radius: 0;
+  }
+</style>
+
+<<#MTK=SELECT_PROG,01>><<#ROU_CODE=<@GET_ANSWER>>>
+<<#MTK=SELECT_PROG,11>><<#YEAR_OF_STUDY=<@GET_ANSWER>>>
+<<#MTK=SELECT_PROG,02>><<#AYR_CODE=<@GET_ANSWER>>>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2 class="page-header">
+        <<ROU_CODE=<#ROU_CODE>&GROU_NAME.ROU.CAMS>> - <<#ROU_CODE>> - <<#AYR_CODE>> - Year <<#YEAR_OF_STUDY>>
+        <span class="label label-success"><<SCE_ROUC=<#ROU_CODE>·;SCE_YPRG=0<#YEAR_OF_STUDY>·;SCE_AYRC=<#AYR_CODE>·;SCE_STAC=MM·|SS·;COUNTONLY=Y&GSCE_SCJC.SCE.SRS>> students</span>
+      </h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-9">
+      <div class="well clearfix">
+        <div class="col-sm-6">
+          <fieldset>
+            <legend>Show/hide columns</legend>
+            <ul class="list-unstyled">
+              <li><label><input type="checkbox" data-uoeid="toggle-column-id" checked /> Student ID</label></li>
+              <li><label><input type="checkbox" data-uoeid="toggle-column-name" checked /> Student Name</label></li>
+              <li><label><input type="checkbox" data-uoeid="toggle-column-exam-no" checked /> Examination number</label></li>
+            </ul>
+          </fieldset>
+        </div>
+        <div class="col-sm-6">
+          <fieldset>
+            <legend>Show/hide rows</legend>
+            <label><input type="checkbox" data-uoeid="toggle-row-closed" /> Hide published rows</label>
+          </fieldset>
+        </div>
+      </div>
+      <table class="table table-progression" data-uoeid="progression-table" data-sortie="|a|a|a">
+      <thead>
+        <tr>
+          <th scope="col"><input type="checkbox" /><span class="sr-only">Select all students</span>
+          <th scope="col" data-uoeid="column-id">Student ID
+          <th scope="col" data-uoeid="column-name">Name
+          <th scope="col" data-uoeid="column-exam-no">Exam no.
+          <th scope="col">Progression decision
+          <th scope="col">Status
+          <th scope="col"><span class="sr-only">Actions</span>
+      <tbody>
+      <<SCE_ROUC=<#ROU_CODE>·;SCE_YPRG=0<#YEAR_OF_STUDY>·;SCE_AYRC=<#AYR_CODE>·;SCE_STAC=MM·|SS&G[SCE.SRS:
+      ·<·<@PROG_AWD_STUDENT_ROW·>·>
+      ]>>
+      </tbody>
+      </table>
+    </div>
+    <div class="col-sm-3">
+      <div class="well" data-uoeid="progression-actions">
+        <h3 class="h4 not-separate">Actions</h3>
+        <button class="btn btn-block btn-info" type="button" data-uoeid="btn-calculate">Calculate</button>
+
+        <h3 class="h4">Status</h3>
+        <button class="btn btn-block btn-default" type="button">None</button>
+        <button class="btn btn-block btn-default" type="button">Ready for board</button>
+        <button class="btn btn-block btn-default" type="button">Ratified</button>
+        <button class="btn btn-block btn-primary" type="button">Published</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="application/json" data-uoeid="translation-values">
+<<#PRG_CODE=PTMSC>>
+{
+  "progression": {<<"PIT_IUSE=Y"&G[PIT.CAMS:"·<·<PIT_CODE·>·>": {"label": "·<·<PIT_NAME·>·>", "givesAward": "·<·<PIT_AWDP·&S"T"="Y"·&S""="N"·>·>"},]>> "":{}},
+  "award": {<<PRG_CODE.PAW.CAMS=<#PRG_CODE>&G[PAW.CAMS:"·<·<AWD_CODE·>·>": {"label": "·<·<AWD_CODE=·<AWD_CODE·>·&GAWD_NAME.AWD.CAMS·>·>", "description": "·<·<AWD_CODE=·<AWD_CODE·>·&GAWD_DESC.AWD.CAMS·>·>"},]>> "":{}}
+}
+</script>
+<script>
+uoe.require('jquery2', function() {
+  var $ = uoe.$;
+  var modalRequest;
+
+  var translations = JSON.parse($('[data-uoeid="translation-values"]').html());
+
+  /**
+   * indeterminateCheckboxUpdate
+   * Sets the value of a potentially indeterminate checkbox depending on
+   * its child values
+   *
+   * @param $checkbox HTMLElement, the checkbox to update
+   * @param sum Integer, the sum of the children (+1 for checked, -1 otherwise)
+   * @param totaLength Integer, the number of children
+   * @returns void
+   */
+  function indeterminateCheckboxUpdate(checkbox, sum, totalLength) {
+    if (sum === totalLength) {
+      checkbox.checked = true;
+      checkbox.indeterminate = false;
+    } else if (sum === totalLength * -1) {
+      checkbox.checked = false;
+      checkbox.indeterminate = false;
+    } else {
+      checkbox.checked = false;
+      checkbox.indeterminate = true;
+    }
+  }
+
+  /**
+   * Create a situation where a header checkbox controls a bunch of children
+   */
+  function headerCheckboxes($header, $children) {
+    if ($header[0].tagName === 'TABLE') {
+      return headerCheckboxes($header.find('thead input[type=checkbox]'), $header.find('tbody input[type=checkbox]'))
+    }
+
+    function toggleBodyCheckbox(skipHeader) {
+      var total = 0;
+      $children.each(function() {
+        total += (this.checked ? 1 : -1);
+      });
+
+      // Unless told not to, update the header checkbox to reflect its
+      // children. You may not want to if the header itself is causing the
+      // cascade.
+      if (!skipHeader) {
+        indeterminateCheckboxUpdate($header[0], total, $children.length);
+      }
+    }
+
+    function toggleHeaderCheckbox() {
+      $children.each(function() {
+        $(this).prop('checked', $header.prop('checked')).triggerHandler('change');
+        toggleBodyCheckbox(true);
+      });
+    }
+
+    $header.on('click', toggleHeaderCheckbox);
+    $children.on('click', function() {
+      toggleBodyCheckbox();
+    });
+  }
+
+  /**
+   * Make an element work like "position: sticky" would intend
+   */
+  function makeSticky($element) {
+    // Determine how far the element is from the top of the document
+    var offset = $element.offset().top;
+    // Cache the element's width, because it needs to be specified when
+    // `position: fixed`
+    var width = $element.width();
+
+    $(window).on('scroll.stickyElements', function() {
+      // Determine the scroll offset. The `documentElement` method is for
+      // Internet Explorer.
+      var scrollY = window.scrollY || document.documentElement.scrollTop;
+
+      if (scrollY > offset) {
+        // If it's past the scroll point, fix the element
+        $element.css({position: 'fixed', top: 0}).width(width);
+      } else {
+        // Otherwise, undo our fixing by removing properties
+        $element.css({position: '', top: '', width: ''});
+      }
+    });
+  }
+
+  /**
+   * Seralise a form to submit over AJAX
+   *
+   * @param $button {jQuery object} A button that should emulate being clicked
+   * @returns {jQuery promise} A deferred/promise that will resolve when the
+   * page has finished loading
+   */
+  function serialiseForm($button) {
+    var $form = $('form');
+    var url = $form.attr('action');
+    var data = $form.serialize();
+
+    // Add the button
+    if ($button.length) {
+      data = data + '&' + encodeURIComponent($button.attr('name')) + '=' + encodeURIComponent($button.val());
+    }
+
+    // Fire an AJAX request (in place of actually clicking the button)
+    return $.ajax({
+      type: 'POST',
+      url: url,
+      data: data
+    });
+  }
+
+  function fieldTranslation(field, value) {
+    return translations[field][value].label;
+  }
+
+  // Generate a function to edit a field
+  function editFieldFactory(field) {
+    return function editField() {
+      var $container = $('[data-uoeid=btn-modal-edit-' + field + ']').parent();
+      var $button = $('[data-uoeid="btn-modal-edit-' + field + '"]');
+      var $field = $container.find('.field-editable');
+      var $hidden = $container.find('input[type=hidden]');
+      var $input = $container.data('input');
+
+      if ($input) {
+        // If the input has been put up, cancel the editing
+        $field.html(fieldTranslation(field, $container.data('previousValue')));
+        $hidden.val($container.data('previousValue'));
+        $button.html($button.data('originalText'));
+        $container.data('input', null);
+      } else {
+        // Otherwise, add an input element to the page
+        $input = $('<input />')
+          .addClass('form-control')
+          .css({display: 'inline-block', width: 'auto'})
+          .on('keyup', function() {
+            $hidden.val($input.val());
+          });
+
+        $container.data('previousValue', $hidden.val());
+        $container.data('input', $input);
+        $button.data('originalText', $button.html());
+        $button.html('Cancel');
+        $field.html('').append($input);
+        $input.focus();
+      }
+    }
+  }
+
+  function saveModal() {
+    // Store the values in form fields
+    $('[data-uoeid="save-pit_code"]').val($('[data-uoeid="modal-pit_code"]').val());
+    $('[data-uoeid="save-awd_code"]').val($('[data-uoeid="modal-awd_code"]').val());
+    $('[data-uoeid="save-spi_mint"]').val($('[data-uoeid="modal-spi_mint"]').val());
+    $('[data-uoeid="save-spi_note"]').val($('[data-uoeid="modal-spi_note"]').val());
+
+    // Send the form
+    serialiseForm($('[data-uoeid="btn-act-save-modal"]')).then(function() {
+      // When it has saved, hide the modal
+      $('[data-uoeid="modal-edit"]').modal('hide');
+
+      // Show a success message
+      uoe.require('modal', function() {
+        uoe.modal.open('Changes saved', 'Your changes have successfully been saved', [{
+          label: 'Close',
+          action: 'dismiss'
+        }]);
+      });
+    });
+  }
+
+  // Cache the active table
+  var $table = $('[data-uoeid="progression-table"]');
+
+  // Apply togglers to the columns of the table
+  var $columnTogglers = $('[data-uoeid^="toggle-column-"]');
+  $columnTogglers.click(function() {
+    var columnId = $(this).data('uoeid').substr(14);
+    var $th = $table.find('thead > tr > th[data-uoeid="column-' + columnId + '"]');
+    var $cells = $table.find('tbody > tr > :nth-child(' + ($th.index() + 1) + ')');
+    // Show/hide the cells as asked
+    $th.add($cells).prop('hidden', !this.checked);
+  });
+
+  // Allow users to hide rows which are marked as "published"
+  $('[data-uoeid="toggle-row-closed"]').click(function() {
+    $table.find('tbody > tr[data-uoe-agreed="Y"]').prop('hidden', this.checked);
+  });
+
+  // Make the actions well sticky
+  makeSticky($('[data-uoeid="progression-actions"]'));
+
+  // Apply Sortie to the table
+  uoe.require('sortie.min', function(Sortie) {
+    Sortie.attachTojQuery(uoe.$);
+    $table.sortie();
+  });
+
+  // Make the table work with proper checkboxes
+  headerCheckboxes($table);
+
+  // Calculation action
+  $('[data-uoeid="btn-calculate"]').on('click', function actionCalculate() {
+    var items = [];
+    // Find the selected rows in the table
+    $table.find('input[type=checkbox]:visible:checked').each(function() {
+      var $row = $(this).closest('tr');
+      items.push($row.attr('data-uoe-scj-code') + ',' + $row.attr('data-uoe-spi-seq2'));
+    });
+
+    // Fill the data into elements on the page
+    $('[data-uoeid="spi-ids"]').val(items.join(';'));
+    $('[data-uoeid="spi-count"]').val(items.length);
+
+    // If items are selected, continue. Otherwise, show a warning.
+    if (items.length > 0) {
+      $('[data-uoeid="btn-act-calculate"]').click();
+    } else {
+      uoe.require('modal', function() {
+        uoe.modal.open('Must select students', 'Please select which students you would like to calculate progression for.', [{
+          label: 'Close',
+          action: 'dismiss'
+        }]);
+      });
+    }
+  });
+
+  // Open edit modal action
+  $('[data-uoeid="btn-edit-modal"]').on('click', function actionEditModal() {
+    var $row = $(this).closest('tr');
+    var $button = $('[data-uoeid="btn-act-edit-modal"]');
+
+    // Fill in data
+    $('[data-uoeid="spi-ids"]').val($row.attr('data-uoe-scj-code') + ',' + $row.attr('data-uoe-spi-seq2'));
+    $('[data-uoeid="spi-count"]').val(1);
+
+    // Cancel any previous modal requests so they don't overlap
+    if (typeof modalRequest === 'object' && typeof modalRequest.abort === 'function') {
+      modalRequest.abort();
+    }
+
+    // Seralise the form and add the button that we supposedly clicked
+    modalRequest = serialiseForm($button);
+    modalRequest.then(function(contents) {
+      // Remove all other modals
+      $('body').find('.modal').remove();
+
+      var x = 'd';
+      log(x);
+
+      // Add the new modal to the page
+      var $contents = $(contents);
+      $('body').append($contents);
+
+      // Add event listeners to the modal
+      $contents.find('[data-uoeid=btn-modal-save]').on('click', saveModal);
+      $contents.find('[data-uoeid=btn-modal-edit-progression]').on('click', editFieldFactory('progression'));
+      $contents.find('[data-uoeid=btn-modal-edit-award]').on('click', editFieldFactory('award'));
+
+      // Show this one
+      $contents.modal('show');
+    });
+  });
+});
+
+uoe.require('bootstrap');
+</script>
