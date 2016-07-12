@@ -22,24 +22,41 @@
     'end' :'--'
     'name': 'comment.line.srltext'
   'operator':
-    'match': '&(A(PREFIX|SUFFIX)?|C|D|E(F|L)?|F|G|HX?|L|M|N|P|Q|R|S(BLANK)?|U|V|W|X|#(ASCII|LATIN|UCAS|MD5|5|URL|BASE64|BASE64URL|SQL|AES|TDES|BLOWFISH|SSO|SSOREC)|%|@){1}'
+    'match': '&(A(PREFIX|SUFFIX)?|C|D|E(F|L)?([0-9]*)|F|G|HX?|L|M|N|P|Q|R|S(BLANK)?|U|V|W|X|#(ASCII|LATIN|UCAS|MD5|5|URL|BASE64|BASE64URL|SQL|AES|TDES|BLOWFISH|SSO|SSOREC)|%|@){1}'
     'name': 'keyword.control.amp.srltext'
   'slp-ref':
     'match': '@([A-Z0-9_.]+)'
     'name': 'entity.name.function.srltext'
   'variable-definition':
-    'match': '(#(?:[A-Z0-9_.]+))(=)'
-    'captures':
+    'begin': '(#(?:[A-Z0-9_.]+))(=)'
+    'beginCaptures':
       '1':
         'name': 'punctuation.definition.variable.srltext'
       '2':
         'name': 'keyword.operator.assignment.srltext'
+    'end': '(\n|\r|\Z)'
+    'patterns': [
+      { 'include': '#tag-single' }
+    ]
   'variable-ref':
     'match': '#([A-Z0-9_.]+)'
     'name': 'variable.other.srltext'
   'field-ref':
-    'match': '([A-Z]{3}_[A-Z0-9]+)(\\.[A-Z0-9]+)?(\\.[A-Z]{3,10})?'
-    'name': 'entity.name.tag.srltext'
+    'match': '([A-Z]{3,4}_[A-Z0-9]+)(?:(\\.)([A-Z0-9]+))?(?:(\\.)([A-Z]{3,10}))?'
+    'captures':
+      '1':
+        'name': 'entity.name.tag.srltext'
+      '2':
+        'name': 'meta.delimiter.property.period.srltext'
+      '3':
+        'name': 'entity.name.tag.srltext'
+      '4':
+        'name': 'meta.delimiter.property.period.srltext'
+      '5':
+        'name': 'entity.name.tag.srltext'
+  'special-register':
+    'match': '\\$\\$?([a-zA-Z0-9_]+)'
+    'name': 'keyword.control.register.srltext'
   'tag-double':
     'begin': '(<<)'
     'captures':
@@ -48,6 +65,9 @@
     'end': '(>>)'
     'name': 'meta.tag.preprocessor.srltext'
     'patterns': [
+      {
+        'include': '#tag-single'
+      }
       {
         'include': '#comment'
       }
@@ -65,6 +85,12 @@
       }
       {
         'include': '#operator'
+      }
+      {
+        'include': '#special-register'
+      }
+      {
+        'include': '#string'
       }
     ]
   'tag-single':
@@ -90,6 +116,12 @@
       {
         'include': '#field-ref'
       }
+      {
+        'include': '#special-register'
+      }
+      {
+        'include': '#string'
+      }
     ],
   'string':
     'begin': '"'
@@ -103,6 +135,7 @@
         'name': 'string.quoted.double.srltext'
     'patterns': [
       {'include': '#tag-double'}
+      {'include': '#tag-single'}
     ]
   'conditionals':
    'patterns': [
