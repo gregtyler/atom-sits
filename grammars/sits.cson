@@ -147,10 +147,12 @@
      }
    ]
   'sel-begin':
-    'begin': '\\{\\{(SEL):\\(?'
+    'begin': '\\{\\{(--(?:.*)--)?(SEL):\\(?'
     'end': '\\)?:'
     'beginCaptures':
       '1':
+        'name': 'comment.line.srltext'
+      '2':
         'name': 'keyword.control.srltext'
     'patterns': [
       {
