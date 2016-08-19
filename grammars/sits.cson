@@ -34,7 +34,7 @@
         'name': 'punctuation.definition.variable.srltext'
       '2':
         'name': 'keyword.operator.assignment.srltext'
-    'end': '(\n|\r|\Z)'
+    'end': '.'
     'patterns': [
       { 'include': '#tag-single' }
     ]
