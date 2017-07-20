@@ -1,3 +1,6 @@
+## 0.6.1
+ * Fix bug with strict mode on `&P` (i.e. `&P!`)
+
 ## 0.6.0
  * Additional coverage for more complicated syntax
  * Changed colouring of fields and variables to be more consistent about what is Tribal-defined and what is developer-defined
