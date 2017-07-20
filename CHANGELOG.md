@@ -1,3 +1,7 @@
+## 0.6.0
+ * Additional coverage for more complicated syntax
+ * Changed colouring of fields and variables to be more consistent about what is Tribal-defined and what is developer-defined
+
 ## 0.5.8
  * Fixed bug with variable definitions being greedy and breaking all proceeding syntax
 
