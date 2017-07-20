@@ -22,7 +22,7 @@
     'end' :'--'
     'name': 'comment.line.srltext'
   'operator':
-    'match': '&(A(?:PREFIX|SUFFIX)?|C|D|E(F|L)?([0-9]*)|F|G|HX?|L|M|N|P([A-Z0-9_]+\.[A-Z0-9_]+)|Q|R|S(?:BLANK)?|U|V|W|X|#(ASCII|LATIN|UCAS|MD5|5|URL|BASE64|BASE64URL|SQL|AES|TDES|BLOWFISH|SSO|SSOREC)|%|@)'
+    'match': '&(A(?:PREFIX|SUFFIX)?|C|D|E(F|L)?([0-9]*)|F|G|HX?|L|M|N|P!?([A-Z0-9_]+\.[A-Z0-9_]+)|Q|R|S(?:BLANK)?|U|V|W|X|#(ASCII|LATIN|UCAS|MD5|5|URL|BASE64|BASE64URL|SQL|AES|TDES|BLOWFISH|SSO|SSOREC)|%|@)'
     'captures':
       '0':
         'name': 'keyword.control.amp.srltext'
