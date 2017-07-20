@@ -22,41 +22,62 @@
     'end' :'--'
     'name': 'comment.line.srltext'
   'operator':
-    'match': '&(A(PREFIX|SUFFIX)?|C|D|E(F|L)?([0-9]*)|F|G|HX?|L|M|N|P|Q|R|S(BLANK)?|U|V|W|X|#(ASCII|LATIN|UCAS|MD5|5|URL|BASE64|BASE64URL|SQL|AES|TDES|BLOWFISH|SSO|SSOREC)|%|@){1}'
-    'name': 'keyword.control.amp.srltext'
+    'match': '&(A(?:PREFIX|SUFFIX)?|C|D|E(F|L)?([0-9]*)|F|G|HX?|L|M|N|P([A-Z0-9_]+\.[A-Z0-9_]+)|Q|R|S(?:BLANK)?|U|V|W|X|#(ASCII|LATIN|UCAS|MD5|5|URL|BASE64|BASE64URL|SQL|AES|TDES|BLOWFISH|SSO|SSOREC)|%|@)'
+    'captures':
+      '0':
+        'name': 'keyword.control.amp.srltext'
+      '2':
+        'name': 'variable.other.srltext'
+      '3':
+        'name': 'variable.other.srltext'
+      '4':
+        'name': 'variable.other.srltext'
+      '5':
+        'name': 'variable.other.srltext'
   'slp-ref':
     'match': '@([A-Z0-9_.]+)'
     'name': 'entity.name.function.srltext'
   'variable-definition':
-    'begin': '(#(?:[A-Z0-9_.]+))(=)'
-    'beginCaptures':
+    'match': '(#(?:[A-Z0-9_.]+))(=)'
+    'captures':
       '1':
         'name': 'punctuation.definition.variable.srltext'
       '2':
         'name': 'keyword.operator.assignment.srltext'
-    'end': '.'
     'patterns': [
       { 'include': '#tag-single' }
     ]
+  'task-parameter-ref':
+    'match': '(TKPV~[A-Z0-9_-]+~[A-Z0-9_-]+)'
+    'name': 'variable.other.srltext'
   'variable-ref':
     'match': '#([A-Z0-9_.]+)'
     'name': 'variable.other.srltext'
   'field-ref':
-    'match': '([A-Z]{3,4}_[A-Z0-9]+)(?:(\\.)([A-Z0-9]+))?(?:(\\.)([A-Z]{3,10}))?'
+    'match': '([A-Z]{3,4}_[A-Z0-9]+)(?:(\\.)([A-Z0-9]+))?(?:(\\.)([A-Z]{3,10}))?(?:=([^<·]*))?'
     'captures':
       '1':
-        'name': 'entity.name.tag.srltext'
+        'name': 'entity.other.attribute-name.srltext'
       '2':
         'name': 'meta.delimiter.property.period.srltext'
       '3':
-        'name': 'entity.name.tag.srltext'
+        'name': 'entity.other.attribute-name.srltext'
       '4':
         'name': 'meta.delimiter.property.period.srltext'
       '5':
-        'name': 'entity.name.tag.srltext'
+        'name': 'entity.other.attribute-name.srltext'
+      '6':
+        'name': 'string.srltext'
   'special-register':
     'match': '\\$\\$?([a-zA-Z0-9_]+)'
-    'name': 'keyword.control.register.srltext'
+    'name': 'support.variable.global.srltext'
+  'dmu-action':
+    'match': '(P[0-9]+)=.*?(·;)?'
+    'captures':
+      '1':
+        'name': 'keyword.control.register.srltext'
+      '2':
+        'name': 'punctuation.definition.separator.srltext'
   'tag-double':
     'begin': '(<<)'
     'captures':
@@ -78,6 +99,9 @@
         'include': '#variable-definition'
       }
       {
+        'include': '#task-parameter-ref'
+      }
+      {
         'include': '#variable-ref'
       }
       {
@@ -91,6 +115,9 @@
       }
       {
         'include': '#string'
+      }
+      {
+        'include': '#dmu-action'
       }
     ]
   'tag-single':
@@ -109,6 +136,9 @@
       }
       {
         'include': '#variable-definition'
+      }
+      {
+        'include': '#task-parameter-ref'
       }
       {
         'include': '#variable-ref'
