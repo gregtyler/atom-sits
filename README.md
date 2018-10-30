@@ -10,9 +10,9 @@ Allows you to quickly enter SITS "gold" characters by preceding suitable keys wi
 
 Works with the following characters:
  * <
- * >
+ * \>
  * ;
- * *
+ * \*
  * !
  * |
  * =
